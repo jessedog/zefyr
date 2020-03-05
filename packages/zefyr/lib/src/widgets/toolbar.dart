@@ -57,7 +57,7 @@ abstract class ZefyrToolbarDelegate {
   ///
   /// Returned widget is usually an instance of [ZefyrButton].
   Widget buildButton(BuildContext context, ZefyrToolbarAction action,
-      {VoidCallback onPressed});
+    {VoidCallback onPressed});
 }
 
 /// Scaffold for [ZefyrToolbar].
@@ -78,7 +78,7 @@ class ZefyrToolbarScaffold extends StatelessWidget {
     final theme = ZefyrTheme.of(context).toolbarTheme;
     final toolbar = ZefyrToolbar.of(context);
     final constraints =
-        BoxConstraints.tightFor(height: ZefyrToolbar.kToolbarHeight);
+    BoxConstraints.tightFor(height: ZefyrToolbar.kToolbarHeight);
     final children = <Widget>[
       Expanded(child: body),
     ];
@@ -114,7 +114,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
 
   static ZefyrToolbarState of(BuildContext context) {
     final _ZefyrToolbarScope scope =
-        context.dependOnInheritedWidgetOfExactType<_ZefyrToolbarScope>();
+    context.dependOnInheritedWidgetOfExactType<_ZefyrToolbarScope>();
     return scope?.toolbar;
   }
 
@@ -127,7 +127,7 @@ class ZefyrToolbar extends StatefulWidget implements PreferredSizeWidget {
 
 class _ZefyrToolbarScope extends InheritedWidget {
   _ZefyrToolbarScope({Key key, @required Widget child, @required this.toolbar})
-      : super(key: key, child: child);
+    : super(key: key, child: child);
 
   final ZefyrToolbarState toolbar;
 
@@ -138,7 +138,7 @@ class _ZefyrToolbarScope extends InheritedWidget {
 }
 
 class ZefyrToolbarState extends State<ZefyrToolbar>
-    with SingleTickerProviderStateMixin {
+  with SingleTickerProviderStateMixin {
   final Key _toolbarKey = UniqueKey();
   final Key _overlayKey = UniqueKey();
 
@@ -159,7 +159,7 @@ class ZefyrToolbarState extends State<ZefyrToolbar>
   }
 
   Widget buildButton(BuildContext context, ZefyrToolbarAction action,
-      {VoidCallback onPressed}) {
+    {VoidCallback onPressed}) {
     return _delegate.buildButton(context, action, onPressed: onPressed);
   }
 
@@ -194,7 +194,7 @@ class ZefyrToolbarState extends State<ZefyrToolbar>
     super.initState();
     _delegate = widget.delegate ?? _DefaultZefyrToolbarDelegate();
     _overlayAnimation =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 100));
+      AnimationController(vsync: this, duration: Duration(milliseconds: 100));
     _selection = editor.selection;
   }
 
@@ -238,7 +238,7 @@ class ZefyrToolbarState extends State<ZefyrToolbar>
     }
 
     final constraints =
-        BoxConstraints.tightFor(height: ZefyrToolbar.kToolbarHeight);
+    BoxConstraints.tightFor(height: ZefyrToolbar.kToolbarHeight);
     return _ZefyrToolbarScope(
       toolbar: this,
       child: Container(
@@ -250,6 +250,7 @@ class ZefyrToolbarState extends State<ZefyrToolbar>
 
   List<Widget> _buildButtons(BuildContext context) {
     final buttons = <Widget>[
+      if (editor.imageDelegate != null) ImageButton(),
       buildButton(context, ZefyrToolbarAction.bold),
       buildButton(context, ZefyrToolbarAction.italic),
       LinkButton(),
@@ -259,7 +260,6 @@ class ZefyrToolbarState extends State<ZefyrToolbar>
       buildButton(context, ZefyrToolbarAction.quote),
       buildButton(context, ZefyrToolbarAction.code),
       buildButton(context, ZefyrToolbarAction.horizontalRule),
-      if (editor.imageDelegate != null) ImageButton(),
     ];
     return buttons;
   }
@@ -301,11 +301,11 @@ class _ZefyrButtonListState extends State<ZefyrButtonList> {
     );
 
     final leftArrow = _showLeftArrow
-        ? Icon(Icons.arrow_left, size: 18.0, color: color)
-        : null;
+      ? Icon(Icons.arrow_left, size: 18.0, color: color)
+      : null;
     final rightArrow = _showRightArrow
-        ? Icon(Icons.arrow_right, size: 18.0, color: color)
-        : null;
+      ? Icon(Icons.arrow_right, size: 18.0, color: color)
+      : null;
     return Row(
       children: <Widget>[
         SizedBox(
@@ -326,9 +326,9 @@ class _ZefyrButtonListState extends State<ZefyrButtonList> {
   void _handleScroll() {
     setState(() {
       _showLeftArrow =
-          _controller.position.minScrollExtent != _controller.position.pixels;
+        _controller.position.minScrollExtent != _controller.position.pixels;
       _showRightArrow =
-          _controller.position.maxScrollExtent != _controller.position.pixels;
+        _controller.position.maxScrollExtent != _controller.position.pixels;
     });
   }
 }
@@ -371,7 +371,7 @@ class _DefaultZefyrToolbarDelegate implements ZefyrToolbarDelegate {
 
   @override
   Widget buildButton(BuildContext context, ZefyrToolbarAction action,
-      {VoidCallback onPressed}) {
+    {VoidCallback onPressed}) {
     final theme = Theme.of(context);
     if (kDefaultButtonIcons.containsKey(action)) {
       final icon = kDefaultButtonIcons[action];
@@ -386,7 +386,7 @@ class _DefaultZefyrToolbarDelegate implements ZefyrToolbarDelegate {
       final text = kDefaultButtonTexts[action];
       assert(text != null);
       final style = theme.textTheme.caption
-          .copyWith(fontWeight: FontWeight.bold, fontSize: 14.0);
+        .copyWith(fontWeight: FontWeight.bold, fontSize: 14.0);
       return ZefyrButton.text(
         action: action,
         text: text,
