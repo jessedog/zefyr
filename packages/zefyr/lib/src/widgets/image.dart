@@ -37,7 +37,7 @@ abstract class ZefyrImageDelegate<S> {
   /// Depending on your application returned key may represent a path to
   /// an image file on user's device, an HTTP link, or an identifier generated
   /// by a file hosting service like AWS S3 or Google Drive.
-  Future<String> pickImage(S source);
+  Future<List<String>> pickImage(S source);
 }
 
 class ZefyrImage extends StatefulWidget {

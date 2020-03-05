@@ -283,6 +283,7 @@ class _ImageButtonState extends State<ImageButton> {
     if (imageList != null) {
       for (final image in imageList) {
         editor.formatSelection(NotusAttribute.embed.image(image));
+        await Future.delayed(Duration(milliseconds: 400));
       }
     }
   }
